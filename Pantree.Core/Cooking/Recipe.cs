@@ -1,6 +1,6 @@
 using Pantree.Core.Utilities.Interfaces;
 
-namespace Pantree.Core.Models
+namespace Pantree.Core.Cooking
 {
     /// <summary>
     /// A collection of <see cref="Ingredient"/>s and instructions that, together, create a full demonstration of how

@@ -1,4 +1,4 @@
-using Pantree.Core.Models;
+using Pantree.Core.Cooking;
 using Pantree.Core.Utilities.Measurement;
 using Xunit;
 

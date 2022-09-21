@@ -1,7 +1,7 @@
-using Pantree.Core.Models;
+using Pantree.Core.Cooking;
 using Xunit;
 
-namespace Pantree.Core.Tests.Models
+namespace Pantree.Core.Tests.Cooking
 {
     public class NutritionTests
     {

@@ -1,6 +1,6 @@
 using Pantree.Core.Utilities.Interfaces;
 
-namespace Pantree.Core.Models
+namespace Pantree.Core.Cooking
 {
     /// <summary>
     /// A collection of nutritional information, meant to mimic a nutritional label found on food packaging

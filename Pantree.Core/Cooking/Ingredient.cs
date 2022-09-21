@@ -1,7 +1,7 @@
 using Pantree.Core.Utilities.Interfaces;
 using Pantree.Core.Utilities.Measurement;
 
-namespace Pantree.Core.Models
+namespace Pantree.Core.Cooking
 {
     /// <summary>
     /// A combination of a <see cref="Models.Food"/> and a <see cref="Measurement{FoodUnit}"/> that serves as the

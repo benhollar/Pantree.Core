@@ -1,6 +1,6 @@
 using Pantree.Core.Utilities.Measurement;
 
-namespace Pantree.Core.Models
+namespace Pantree.Core.Cooking
 {
     /// <summary>
     /// Common units used to describe a quantity of food

@@ -1,8 +1,8 @@
-using Pantree.Core.Models;
+using Pantree.Core.Cooking;
 using Pantree.Core.Utilities.Measurement;
 using Xunit;
 
-namespace Pantree.Core.Tests.Models
+namespace Pantree.Core.Tests.Cooking
 {
     public class FoodUnitTests
     {
