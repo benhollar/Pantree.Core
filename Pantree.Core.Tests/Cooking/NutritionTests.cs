@@ -11,7 +11,9 @@ namespace Pantree.Core.Tests.Cooking
         {
             // Check that addition is commutative, though it's unlikely not to be
             Assert.Equal(expected, lhs + rhs);
+            Assert.Equal(expected.GetHashCode(), (lhs + rhs).GetHashCode());
             Assert.Equal(expected, rhs + lhs);
+            Assert.Equal(expected.GetHashCode(), (rhs + lhs).GetHashCode());
         }
 
         [Theory]
@@ -26,7 +28,9 @@ namespace Pantree.Core.Tests.Cooking
 
             // Check that multiplication is commutative
             Assert.Equal(expected, lhs * rhs);
+            Assert.Equal(expected.GetHashCode(), (lhs * rhs).GetHashCode());
             Assert.Equal(expected, rhs * lhs);
+            Assert.Equal(expected.GetHashCode(), (rhs * lhs).GetHashCode());
         }
 
         public static IEnumerable<object?[]> AdditionTestData => new List<object?[]>
