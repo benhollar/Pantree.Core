@@ -10,7 +10,7 @@ namespace Pantree.Core.Cooking
     public record struct Ingredient : Identifiable
     {
         /// <inheritdoc/>
-        public Guid Id { get; } = new();
+        public Guid Id { get; init; } = Guid.NewGuid();
 
         /// <summary>
         /// The food component of the <see cref="Ingredient"/>

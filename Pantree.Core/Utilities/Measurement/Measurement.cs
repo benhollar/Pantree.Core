@@ -25,6 +25,15 @@ namespace Pantree.Core.Utilities.Measurement
             Unit = unit;
             Value = value;
         }
+        
+        /// <summary>
+        /// Convert the <see cref="Measurement"/> into a string-based form, using the format "<Value> <Unit>"
+        /// </summary>
+        /// <returns>The string representation of the <see cref="Measurement"/></returns>
+        public override string ToString()
+        {
+            return $"{Value} {Unit}";
+        }
     }
 
     public partial class Measurement<TUnit> : IEquatable<Measurement<TUnit>>

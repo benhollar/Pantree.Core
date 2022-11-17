@@ -8,6 +8,6 @@ namespace Pantree.Core.Utilities.Interfaces
         /// <summary>
         /// A unique identifier for the instance
         /// </summary>
-        public Guid Id { get; }
+        public Guid Id { get; init; }
     }
 }

@@ -8,7 +8,7 @@ namespace Pantree.Core.Cooking
     public record struct Nutrition : Identifiable
     {
         /// <inheritdoc/>
-        public Guid Id { get; } = new();
+        public Guid Id { get; init; } = Guid.NewGuid();
 
         /// <summary>
         /// The number of calories, if known (kCal)
