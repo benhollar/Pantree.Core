@@ -27,7 +27,7 @@ namespace Pantree.Core.Utilities.Measurement
         }
         
         /// <summary>
-        /// Convert the <see cref="Measurement"/> into a string-based form, using the format "<Value> <Unit>"
+        /// Convert the <see cref="Measurement"/> into a string-based form, using the format "{Value} {Unit}"
         /// </summary>
         /// <returns>The string representation of the <see cref="Measurement"/></returns>
         public override string ToString()

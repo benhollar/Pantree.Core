@@ -11,7 +11,7 @@ namespace Pantree.Core.Tests.Cooking
         public void NutritionCalculationTest(Recipe given, Nutrition? expected)
         {
             Assert.Equal(expected, given.TotalNutrition);
-            Assert.Equal(expected * (1 / given.Servings), given.NutritionPerServing);
+            Assert.Equal(expected / given.Servings, given.NutritionPerServing);
         }
 
         [Theory]

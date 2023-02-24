@@ -67,16 +67,15 @@ namespace Pantree.Core.Cooking
         /// <summary>
         /// The portion of the <see cref="TotalNutrition"/> in one serving (see: <see cref="Servings"/>)
         /// </summary>
-        // TODO: Make `Nutrition` support division, which would simplify this expression
         public Nutrition? NutritionPerServing => TotalNutrition is not null
-            ? TotalNutrition * (1 / Servings)
+            ? TotalNutrition / Servings
             : null;
 
         /// <summary>
         /// Construct a new <see cref="Recipe"/>
         /// </summary>
         /// <param name="name">The name of the recipe</param>
-        public Recipe(string name)
+        public Recipe(string name = "New Recipe")
         {
             Name = name;
         }

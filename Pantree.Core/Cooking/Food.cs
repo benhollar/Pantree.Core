@@ -42,6 +42,7 @@ namespace Pantree.Core.Cooking
         }
 
         /// <inheritdoc cref="Food(string)"/>
+        /// <param name="name">The food's name</param>
         /// <param name="baseNutrition">
         /// The nutritional information for the food, such as found on a nutritional label
         /// </param>

@@ -12,20 +12,30 @@ namespace Pantree.Core.Cooking
         /// or volume (i.e. "1 egg" vs. "50g egg")
         /// </summary>
         Unit,
+        /// <summary>The SI gram</summary>
         Gram,
+        /// <summary>The SI milligram</summary>
         Milligram,
+        /// <summary>The United States customary ounce</summary>
         Ounce, 
+        /// <summary>The United States customary pound</summary>
         Pound,
+        /// <summary>The SI-accepted milliliter</summary>
         Milliliter,
+        /// <summary>The SI-accepted liter</summary>
         Liter,
+        /// <summary>The United States customary teaspoon</summary>
         Teaspoon,
+        /// <summary>The United States customary tablespoon</summary>
         Tablespoon,
+        /// <summary>The United States customary fluid ounce</summary>
         FluidOunce,
+        /// <summary>The United States customary cup</summary>
         Cup,
     }
 
     /// <summary>
-    /// A <see cref="UnitConverter"/> for the known <see cref="FoodUnit"/> values
+    /// A <see cref="UnitConverter{T}"/> for the known <see cref="FoodUnit"/> values
     /// </summary>
     public class FoodUnitConverter : UnitConverter<FoodUnit>
     {

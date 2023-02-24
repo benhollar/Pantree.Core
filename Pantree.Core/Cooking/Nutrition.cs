@@ -102,7 +102,8 @@ namespace Pantree.Core.Cooking
         /// <param name="nutrition">The nutritional value to scale</param>
         /// <param name="coefficient">
         /// The coefficient to multiply by, expected to be non-negative. Fractional multipliers are allowed, but values
-        /// will be rounded to the nearest whole number.
+        /// will be rounded to the nearest whole number. Negative multipliers are disallowed due to ambiguous
+        /// implications of negative nutritional values.
         /// </param>
         /// <returns>The multiplied <see cref="Nutrition"/></returns>
         public static Nutrition operator *(Nutrition nutrition, double coefficient)
@@ -126,6 +127,24 @@ namespace Pantree.Core.Cooking
         }
         /// <inheritdoc cref="operator *(Nutrition, double)"/>
         public static Nutrition operator *(double coefficient, Nutrition nutrition) => nutrition * coefficient;
+
+        /// <summary>
+        /// Divide a <see cref="Nutrition"/> by some <paramref name="divisor"/>
+        /// </summary>
+        /// <param name="nutrition">The nutritional value to divide</param>
+        /// <param name="divisor">
+        /// The strictly positive and nonzero divisor. Division by zero, like in purely mathematical situations, is
+        /// undefined here and will result in an <see cref="ArgumentException"/>. Division by negative divisors is
+        /// disallowed due to ambiguous implications of negative nutritional values.
+        /// </param>
+        /// <returns>The divided <see cref="Nutrition"/></returns>
+        public static Nutrition operator /(Nutrition nutrition, double divisor)
+        {
+            if (divisor <= 0)
+                throw new ArgumentException("The divisor must be non-negative and nonzero.", nameof(divisor));
+
+            return nutrition * (1d / divisor);
+        }
 
         /// <summary>
         /// Add two nullable unsigned integers, preserving non-null values
@@ -177,6 +196,7 @@ namespace Pantree.Core.Cooking
                     Protein == rhs.Protein;
         }
 
+        /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode()
         {
             unchecked

@@ -60,6 +60,7 @@ namespace Pantree.Core.Utilities.Measurement
             RegisterConversion(unit, x => x * coefficient, x => x / coefficient);
 
         /// <inheritdoc cref="RegisterConversion(TUnit, double)"/>
+        /// <param name="unit">The unit to register a conversion for</param>
         /// <param name="toBase">A function to convert the given <paramref name="unit"/> to the base unit</param>
         /// <param name="fromBase">A function to convert the base unit to the given <paramref name="unit"/></param>
         public static void RegisterConversion(TUnit unit, Func<double, double> toBase, Func<double, double> fromBase) =>

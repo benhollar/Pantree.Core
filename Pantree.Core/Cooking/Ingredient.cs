@@ -4,7 +4,7 @@ using Pantree.Core.Utilities.Measurement;
 namespace Pantree.Core.Cooking
 {
     /// <summary>
-    /// A combination of a <see cref="Models.Food"/> and a <see cref="Measurement{FoodUnit}"/> that serves as the
+    /// A combination of a <see cref="Food"/> and a <see cref="Measurement{FoodUnit}"/> that serves as the
     /// primary building block of a <see cref="Recipe"/>.
     /// </summary>
     public record struct Ingredient : Identifiable
