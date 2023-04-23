@@ -15,7 +15,7 @@ namespace Pantree.Core.Tests.Cooking
         }
 
         [Theory]
-        [MemberData(nameof(TOtalTimeCalculationTestData))]
+        [MemberData(nameof(TotalTimeCalculationTestData))]
         public void TotalTimeCalculationTest(Recipe given, TimeSpan? expected)
         {
             Assert.Equal(expected, given.TotalTime);
@@ -135,7 +135,7 @@ namespace Pantree.Core.Tests.Cooking
             }
         };
 
-        public static IEnumerable<object?[]> TOtalTimeCalculationTestData => new List<object?[]>
+        public static IEnumerable<object?[]> TotalTimeCalculationTestData => new List<object?[]>
         {
             new object[]
             {
