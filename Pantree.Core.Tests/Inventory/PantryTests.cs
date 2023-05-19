@@ -92,18 +92,18 @@ namespace Pantree.Core.Tests.Inventory
         {
             new Perishable(
                 new Ingredient(new Food("Dummy food 1"), new(1, FoodUnit.Unit)),
-                new DateOnly(2023, 4, 23),
+                DateOnly.FromDateTime(DateTime.Today),
                 TimeSpan.FromDays(7)
             ),
             new Perishable(
                 new Ingredient(new Food("Dummy food 2"), new(1, FoodUnit.Unit)),
-                new DateOnly(2023, 4, 23),
+                DateOnly.FromDateTime(DateTime.Today),
                 TimeSpan.FromDays(1)
             ),
             new Perishable(
                 new Ingredient(new Food("Dummy food 3"), new(1, FoodUnit.Unit)),
-                new DateOnly(2023, 4, 23),
-                new DateOnly(2023, 3, 14)
+                DateOnly.FromDateTime(DateTime.Today),
+                DateOnly.FromDateTime(DateTime.Today - TimeSpan.FromDays(20))
             ),
         };
     }
