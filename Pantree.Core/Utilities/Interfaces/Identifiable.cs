@@ -1,3 +1,5 @@
+using System;
+
 namespace Pantree.Core.Utilities.Interfaces
 {
     /// <summary>
