@@ -9,7 +9,7 @@ namespace Pantree.Core.Cooking
     /// A collection of <see cref="Ingredient"/>s and instructions that, together, create a full demonstration of how
     /// to prepare a given dish.
     /// </summary>
-    public record struct Recipe : Identifiable 
+    public record class Recipe : Identifiable 
     {
         /// <inheritdoc/>
         public Guid Id { get; init; } = Guid.NewGuid();

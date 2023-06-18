@@ -6,11 +6,8 @@ namespace Pantree.Core.Cooking
     /// <summary>
     /// A collection of nutritional information, meant to mimic a nutritional label found on food packaging
     /// </summary>
-    public partial record struct Nutrition : Identifiable
+    public partial record struct Nutrition
     {
-        /// <inheritdoc/>
-        public Guid Id { get; init; } = Guid.NewGuid();
-
         /// <summary>
         /// The number of calories, if known (kCal)
         /// </summary>
@@ -170,72 +167,4 @@ namespace Pantree.Core.Cooking
                 return lhs + rhs;
         }
     }
-
-    public partial record struct Nutrition : IEquatable<Nutrition>
-    {
-        /// <summary>
-        /// Compare this <see cref="Nutrition"/> object with another
-        /// </summary>
-        /// <remarks>
-        /// Note that while <see cref="Nutrition"/> is a record struct, this operation has been overridden to ignore
-        /// the <see cref="Id"/> property. <see cref="Id"/> is a GUID and will be unique even between otherwise
-        /// equivalent nutritional information, which defeats the main use case of comparing two of these objects.
-        /// </remarks>
-        /// <param name="rhs"></param>
-        /// <returns></returns>
-        public bool Equals(Nutrition rhs)
-        {
-            return Calories == rhs.Calories &&
-                    TotalFat == rhs.TotalFat &&
-                    SaturatedFat == rhs.SaturatedFat &&
-                    TransFat == rhs.TransFat &&
-                    Cholesterol == rhs.Cholesterol &&
-                    Sodium == rhs.Sodium &&
-                    Carbohydrates == rhs.Carbohydrates &&
-                    Fiber == rhs.Fiber &&
-                    Sugar == rhs.Sugar &&
-                    Protein == rhs.Protein;
-        }
-
-        /// <inheritdoc cref="object.GetHashCode"/>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int result = 37;
-                result *= 397;
-                if (Calories != null)
-                    result += Calories.GetHashCode();
-                result *= 397;
-                if (TotalFat != null)
-                    result += TotalFat.GetHashCode();
-                result *= 397;
-                if (SaturatedFat != null)
-                    result += SaturatedFat.GetHashCode();
-                result *= 397;
-                if (TransFat != null)
-                    result += TransFat.GetHashCode();
-                result *= 397;
-                if (Cholesterol != null)
-                    result += Cholesterol.GetHashCode();
-                result *= 397;
-                if (Sodium != null)
-                    result += Sodium.GetHashCode();
-                result *= 397;
-                if (Carbohydrates != null)
-                    result += Carbohydrates.GetHashCode();
-                result *= 397;
-                if (Fiber != null)
-                    result += Fiber.GetHashCode();
-                result *= 397;
-                if (Sugar != null)
-                    result += Sugar.GetHashCode();
-                result *= 397;
-                if (Protein != null)
-                    result += Protein.GetHashCode();
-                return result;
-            }
-        }
-    }
-
 }

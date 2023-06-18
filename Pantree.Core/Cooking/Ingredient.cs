@@ -8,7 +8,7 @@ namespace Pantree.Core.Cooking
     /// A combination of a <see cref="Food"/> and a <see cref="Measurement{FoodUnit}"/> that serves as the
     /// primary building block of a <see cref="Recipe"/>.
     /// </summary>
-    public record struct Ingredient : Identifiable
+    public record class Ingredient : Identifiable
     {
         /// <inheritdoc/>
         public Guid Id { get; init; } = Guid.NewGuid();

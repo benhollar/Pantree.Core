@@ -12,7 +12,7 @@ namespace Pantree.Core.Cooking
     /// explicit quantity or other information that would be required in a recipe. A <see cref="Food"/> is "an onion",
     /// not "34 grams of diced onions."
     /// </remarks>
-    public record struct Food : Identifiable
+    public record class Food : Identifiable
     {
         /// <inheritdoc/>
         public Guid Id { get; init; } = Guid.NewGuid();
