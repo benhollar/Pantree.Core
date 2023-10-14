@@ -1,5 +1,4 @@
 using System;
-using Pantree.Core.Utilities.Interfaces;
 
 namespace Pantree.Core.Cooking
 {
@@ -11,52 +10,70 @@ namespace Pantree.Core.Cooking
         /// <summary>
         /// The number of calories, if known (kCal)
         /// </summary>
-        public uint? Calories { get; set; } = null;
+        public double? Calories { readonly get => _calories; set => _calories = ValidateNonnegative(value); }
+        private double? _calories = null;
 
         /// <summary>
         /// The amount of fat, if known (grams)
         /// </summary>
-        public uint? TotalFat { get; set; } = null;
+        public double? TotalFat { readonly get => _totalFat; set => _totalFat = ValidateNonnegative(value); }
+        private double? _totalFat = null;
 
         /// <summary>
         /// The amount of saturated fat, if known (grams)
         /// </summary>
-        public uint? SaturatedFat { get; set; } = null;
+        public double? SaturatedFat
+        { 
+            readonly get => _saturatedFat;
+            set => _saturatedFat = ValidateNonnegative(value);
+        }
+        private double? _saturatedFat = null;
 
         /// <summary>
         /// The amount of trans-unsaturated fat, if known (grams)
         /// </summary>
-        public uint? TransFat { get; set; } = null;
+        public double? TransFat { readonly get => _transFat; set => _transFat = ValidateNonnegative(value); }
+        private double? _transFat = null;
 
         /// <summary>
         /// The amount of cholesterol, if known (milligrams)
         /// </summary>
-        public uint? Cholesterol { get; set; } = null;
+        public double? Cholesterol { readonly get => _cholesterol; set => _cholesterol = ValidateNonnegative(value); }
+        private double? _cholesterol = null;
 
         /// <summary>
         /// The amount of sodium, if known (milligrams)
         /// </summary>
-        public uint? Sodium { get; set; } = null;
+        public double? Sodium { readonly get => _sodium; set => _sodium = ValidateNonnegative(value); }
+        private double? _sodium = null;
 
         /// <summary>
         /// The amount of carbohydrates, if known (grams)
         /// </summary>
-        public uint? Carbohydrates { get; set; } = null;
+        public double? Carbohydrates
+        { 
+            readonly get => _carbohydrates;
+            set => _carbohydrates = ValidateNonnegative(value);
+        }
+        private double? _carbohydrates = null;
 
         /// <summary>
         /// The amount of fiber, if known (grams)
         /// </summary>
-        public uint? Fiber { get; set; } = null;
+        public double? Fiber { readonly get => _fiber; set => _fiber = ValidateNonnegative(value); }
+        private double? _fiber = null;
 
         /// <summary>
         /// The amount of sugar, if known (grams)
         /// </summary>
-        public uint? Sugar { get; set; } = null;
+        public double? Sugar { readonly get => _sugar; set => _sugar = ValidateNonnegative(value); }
+        private double? _sugar = null;
 
         /// <summary>
         /// The amount of protein, if known (grams)
         /// </summary>
-        public uint? Protein { get; set; } = null;
+        public double? Protein { readonly get => _protein; set => _protein = ValidateNonnegative(value); }
+        private double? _protein = null;
 
         /// <summary>
         /// Construct a new <see cref="Nutrition"/>
@@ -111,16 +128,16 @@ namespace Pantree.Core.Cooking
 
             return new Nutrition
             {
-                Calories = (uint?)(nutrition.Calories * coefficient),
-                TotalFat = (uint?)(nutrition.TotalFat * coefficient),
-                SaturatedFat = (uint?)(nutrition.SaturatedFat * coefficient),
-                TransFat = (uint?)(nutrition.TransFat * coefficient),
-                Cholesterol = (uint?)(nutrition.Cholesterol * coefficient),
-                Sodium = (uint?)(nutrition.Sodium * coefficient),
-                Carbohydrates = (uint?)(nutrition.Carbohydrates * coefficient),
-                Fiber = (uint?)(nutrition.Fiber * coefficient),
-                Sugar = (uint?)(nutrition.Sugar * coefficient),
-                Protein = (uint?)(nutrition.Protein * coefficient),
+                Calories = nutrition.Calories * coefficient,
+                TotalFat = nutrition.TotalFat * coefficient,
+                SaturatedFat = nutrition.SaturatedFat * coefficient,
+                TransFat = nutrition.TransFat * coefficient,
+                Cholesterol = nutrition.Cholesterol * coefficient,
+                Sodium = nutrition.Sodium * coefficient,
+                Carbohydrates = nutrition.Carbohydrates * coefficient,
+                Fiber = nutrition.Fiber * coefficient,
+                Sugar = nutrition.Sugar * coefficient,
+                Protein = nutrition.Protein * coefficient,
             };
         }
         /// <inheritdoc cref="operator *(Nutrition, double)"/>
@@ -155,7 +172,7 @@ namespace Pantree.Core.Cooking
         /// <param name="lhs">The first value</param>
         /// <param name="rhs">The second value</param>
         /// <returns>The sum</returns>
-        private static uint? AddNullable(uint? lhs, uint? rhs)
+        private static double? AddNullable(double? lhs, double? rhs)
         {
             if (lhs is null && rhs is null)
                 return null;
@@ -165,6 +182,13 @@ namespace Pantree.Core.Cooking
                 return lhs;
             else
                 return lhs + rhs;
+        }
+
+        private static double? ValidateNonnegative(double? value)
+        {
+            if (value is not null && value < 0)
+                throw new ArgumentException($"Nutritional values must be nonnegative; got {value} instead.");
+            return value;
         }
     }
 }

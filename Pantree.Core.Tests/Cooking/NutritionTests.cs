@@ -7,6 +7,22 @@ namespace Pantree.Core.Tests.Cooking
 {
     public class NutritionTests
     {
+        [Fact]
+        public void NoNonnegativeValuesTest()
+        {
+            Nutrition nutrition = new();
+            Assert.Throws<ArgumentException>(() => nutrition.Calories = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.TotalFat = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.SaturatedFat = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.TransFat = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.Cholesterol = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.Sodium = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.Carbohydrates = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.Fiber = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.Sugar = -1);
+            Assert.Throws<ArgumentException>(() => nutrition.Protein = -1);
+        }
+
         [Theory]
         [MemberData(nameof(AdditionTestData))]
         public void AdditionTest(Nutrition? lhs, Nutrition? rhs, Nutrition? expected)
@@ -231,7 +247,7 @@ namespace Pantree.Core.Tests.Cooking
                 {
                     Calories = 270,
                     TotalFat = 6,
-                    SaturatedFat = 2,
+                    SaturatedFat = 2.5,
                     TransFat = 0,
                     Cholesterol = 45,
                     Sodium = 340,
@@ -355,7 +371,7 @@ namespace Pantree.Core.Tests.Cooking
                 {
                     Calories = 270,
                     TotalFat = 6,
-                    SaturatedFat = 2,
+                    SaturatedFat = 2.5,
                     TransFat = 0,
                     Cholesterol = 45,
                     Sodium = 340,
@@ -417,7 +433,7 @@ namespace Pantree.Core.Tests.Cooking
                 {
                     Calories = 270,
                     TotalFat = 6,
-                    SaturatedFat = 2,
+                    SaturatedFat = 2.5,
                     TransFat = null,
                     Cholesterol = 45,
                     Sodium = 340,
