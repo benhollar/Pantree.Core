@@ -9,7 +9,7 @@ namespace Pantree.Core.Cooking
     /// A collection of <see cref="Ingredient"/>s and instructions that, together, create a full demonstration of how
     /// to prepare a given dish.
     /// </summary>
-    public record class Recipe : Identifiable 
+    public sealed record class Recipe : Identifiable 
     {
         /// <inheritdoc/>
         public Guid Id { get; init; } = Guid.NewGuid();
@@ -102,6 +102,48 @@ namespace Pantree.Core.Cooking
             return componentNutritionalInfo.Count > 0
                 ? componentNutritionalInfo.Aggregate((sum, next) => (sum + next)!.Value)
                 : null;
+        }
+
+        /// <inheritdoc/>
+        public bool Equals(Recipe? other)
+        {
+            if (other is null)
+                return false;
+
+            bool isEqual = true;
+            isEqual = isEqual && Id == other.Id;
+            isEqual = isEqual && Name == other.Name;
+            isEqual = isEqual && Description == other.Description;
+            isEqual = isEqual && Instructions.SequenceEqual(other.Instructions);
+            isEqual = isEqual && Ingredients.SequenceEqual(other.Ingredients);
+            isEqual = isEqual && Servings.Equals(other.Servings);
+            isEqual = isEqual && PreparationTime.Equals(other.PreparationTime);
+            isEqual = isEqual && CookingTime.Equals(other.CookingTime);
+            isEqual = isEqual && TotalTime.Equals(other.TotalTime);
+            isEqual = isEqual && TotalNutrition.Equals(other.TotalNutrition);
+            isEqual = isEqual && NutritionPerServing.Equals(other.NutritionPerServing);
+
+            return isEqual;
+        }
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            HashCode hashCode = new();
+            hashCode.Add(Id);
+            hashCode.Add(Name);
+            hashCode.Add(Description);
+            foreach (string instruction in Instructions)
+                hashCode.Add(instruction);
+            foreach (Ingredient ingredient in Ingredients.OrderBy(x => x.Id))
+                hashCode.Add(ingredient);
+            hashCode.Add(Servings);
+            hashCode.Add(PreparationTime);
+            hashCode.Add(CookingTime);
+            hashCode.Add(TotalTime);
+            hashCode.Add(TotalNutrition);
+            hashCode.Add(NutritionPerServing);
+            return hashCode.ToHashCode();
         }
     }
 }   

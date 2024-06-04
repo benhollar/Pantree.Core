@@ -23,6 +23,28 @@ namespace Pantree.Core.Tests.Cooking
             Assert.Equal(expected, given.TotalTime);
         }
 
+        [Theory]
+        [MemberData(nameof(EqualsTestData))]
+        public void EqualsTest(Recipe lhs, Recipe? rhs, bool expected)
+        {
+            bool equal = lhs.Equals(rhs);
+            Assert.Equal(expected, equal);
+
+            // Further, evaluate the custom `GetHashCode` adheres to the expected properties
+            int lhsHash = lhs.GetHashCode();
+            int? rhsHash = rhs?.GetHashCode();
+            //  Equal objects have equal hashes
+            if (expected)
+                Assert.Equal(lhsHash, rhsHash);
+            //  Repeated calls to `GetHashCode` return the same result if the object is unmodified
+            Assert.Equal(lhsHash, lhs.GetHashCode());
+            //  And likewise, modifying the object modifies its hash code
+            string? originalName = lhs.Name;
+            lhs.Name = "A new name";
+            Assert.NotEqual(lhsHash, lhs.GetHashCode());
+            lhs.Name = originalName;
+        }
+
         public static IEnumerable<object?[]> NutritionCalculationTestData => new List<object?[]>
         {
             // 1x of a base serving
@@ -163,5 +185,53 @@ namespace Pantree.Core.Tests.Cooking
                 null
             }
         };
+
+        public static IEnumerable<object?[]> EqualsTestData()
+        {
+            Recipe example1 = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Recipe",
+                Description = "Lorem ipsum...",
+                Instructions = new() { "1", "2", "3" },
+                Ingredients = new()
+                {
+                    new Ingredient(
+                        new Food("Test Food 1")
+                        {
+                            Id = Guid.NewGuid(),
+                            Nutrition = null,
+                            Measurement = new Measurement<FoodUnit>(1, FoodUnit.Gram)
+                        },
+                        new Measurement<FoodUnit>(1, FoodUnit.Gram)
+                    )
+                    {
+                        Id = Guid.NewGuid()
+                    },
+                    new Ingredient(
+                        new Food("Test Food 2")
+                        {
+                            Id = Guid.NewGuid(),
+                            Nutrition = null,
+                            Measurement = new Measurement<FoodUnit>(1, FoodUnit.Gram)
+                        },
+                        new Measurement<FoodUnit>(1, FoodUnit.Gram)
+                    )
+                    {
+                        Id = Guid.NewGuid()
+                    },
+                },
+                Servings = 1,
+                PreparationTime = TimeSpan.FromMinutes(30),
+                CookingTime = TimeSpan.FromMinutes(40),
+            };
+
+            Recipe example2 = new();
+
+            yield return new object?[] { example1, example1, true };
+            yield return new object?[] { example1, example2, false };
+            yield return new object?[] { example1, null, false };
+            yield return new object?[] { example2, null, false };
+        }
     }
 }
